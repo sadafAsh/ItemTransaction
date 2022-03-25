@@ -1,0 +1,109 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'jacoco'
+	id "org.sonarqube" version "3.3"
+
+}
+
+group = 'com.soj.item.transaction'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+jacoco {
+	toolVersion = "0.8.5"
+	reportsDir = file("$buildDir/jacoco")
+}
+
+test {
+	finalizedBy jacocoTestReport
+}
+jacocoTestReport {
+	dependsOn test
+}
+jacocoTestReport {
+	dependsOn test // tests are required to run before generating the report
+
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: [
+					"**/ItemTransactionApplication.class",
+					"**/*model*",
+					"**/util/*"
+			])
+		}))
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+tasks.named('sonarqube').configure {
+	dependsOn test
+}
+
+sonarqube {
+	properties {
+//		property "sonar.exclusions", "**/*CoffeeInventoryApplication.java"
+//		property "sonar.exclusions", "**/*CoffeeInventoryApplicationTests.java"
+//		property "sonar.coverage.exclusions", "**/Transaction.java"
+		property "sonar.coverage.exclusions", "**/util/*"
+		//property "sonar.exclusions", "**/Transaction.java"
+	//	property "sonar.exclusions","src/.../java/com/soj/coffee/inventory/CoffeeInventoryApplicationTests.java"
+		property "sonar.test.exclusions" ," **/src/test/**"
+		property 'sonar.host.url', 'http://localhost:9000'
+		property 'sonar.login','bfaebb54282060ed00aea153195afc83699ec109'
+		property 'sonar.projectKey','ItemTransaction'
+		property 'sonar.java.coveragePlugin','jacoco'
+		property 'sonar.coverage.jacoco.xmlReportPaths','build/jacoco/test/jacocoTestReport.xml'
+
+	}
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.springframework.boot:spring-boot-starter-web")
+
+	compile("org.apache.commons:commons-lang3:3.0")
+	testCompile("org.springframework.boot:spring-boot-starter-test")
+	testCompile('org.easytesting:fest-assert:1.4')
+	implementation "mysql:mysql-connector-java:8.0.17"
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation('org.junit.jupiter:junit-jupiter-api:5.4.2')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.2')
+//    testCompile "org.powermock:powermock-module-junit4:1.6.4"
+//    testCompile 'org.mockito:mockito-core:2.7.22'
+	implementation 'org.jetbrains:annotations:15.0'
+	implementation 'junit:junit:4.12'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.testng:testng:6.9.6'
+	implementation 'junit:junit:4.12'
+	implementation 'junit:junit:4.12'
+	implementation 'org.testng:testng:6.9.6'
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+//		gradle sonarqube
+//  -Dsonar.projectKey=ItemTransaction
+//  -Dsonar.host.url=http://localhost:9000
+//  -Dsonar.login=bfaebb54282060ed00aea153195afc83699ec109

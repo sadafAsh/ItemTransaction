@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "type": "customer",
+  "attribute": {
+    "id": 1,
+    "name": "zahra",
+    "bank": {
+      "id": 20,
+      "name": "Bank Of Russia",
+      "accNo": 1238,
+      "address": "Russia"
+    }
+  }
+}

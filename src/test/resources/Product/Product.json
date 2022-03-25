@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "type": "product",
+  "attribute": {
+    "id": 1,
+    "name": "chicken gravy",
+    "price": 200,
+    "ingredient": "chicken,spicies,nuts"
+  }
+}

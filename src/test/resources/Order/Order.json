@@ -1,0 +1,44 @@
+
+{
+  "id": 1,
+  "type": "order",
+  "attribute": {
+    "id": 1,
+    "customer": {
+      "id": 3,
+      "name": "jikar",
+      "bank": {
+        "id": 4,
+        "name": "Bank Of America",
+        "accNo": 128,
+        "address": "America"
+      }
+    },
+    "orderDetailList": [
+      {
+        "id": 24,
+        "qty": 2,
+        "totalPrice": 200,
+        "menuItem": {
+          "id": 15,
+          "product": {
+            "id": 18,
+            "name": "chicken malai gravy",
+            "price": 100,
+            "ingredient": "chicken,spicies,cashewnut"
+          },
+          "category": {
+            "id": 16,
+            "name": "Stater",
+            "subCategories": [
+              {
+                "id": 17,
+                "name": "Chicken grill"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

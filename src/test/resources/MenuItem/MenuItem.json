@@ -1,0 +1,23 @@
+{
+  "id": 1,
+  "type": "menuItem",
+  "attribute": {
+    "id": 1,
+    "product": {
+      "id": 16,
+      "name": "mutton malai kofta",
+      "price": 250,
+      "ingredient": "mutton,spicies,mince chicken"
+    },
+    "category": {
+      "id": 14,
+      "name": "Stater",
+      "subCategories": [
+        {
+          "id": 15,
+          "name": "Chicken malai"
+        }
+      ]
+    }
+  }
+}
